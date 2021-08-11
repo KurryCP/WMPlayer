@@ -13,6 +13,8 @@
 
 
 #import "WMPlayer.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 //****************************宏*********************************
 #define WMPlayerSrcName(file) [@"WMPlayer.bundle" stringByAppendingPathComponent:file]
 #define WMPlayerFrameworkSrcName(file) [@"Frameworks/WMPlayer.framework/WMPlayer.bundle" stringByAppendingPathComponent:file]
@@ -165,6 +167,13 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     //设置默认值
     self.enableVolumeGesture = YES;
     self.enableFastForwardGesture = YES;
+    
+    //水印
+    self.watermarkView = [[UIImageView alloc]init];//WithImage:WMPlayerImage(@"watermark")
+    self.watermarkView.frame = CGRectMake(CGRectGetMaxX(self.contentView.bounds) - 90, 16, 74, 74);
+    self.watermarkView.contentMode = UIViewContentModeScaleAspectFit;
+//    self.watermarkView.clipsToBounds = YES;
+    [self.contentView addSubview:self.watermarkView];
     
     //小菊花
     self.loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -395,6 +404,9 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     self.FF_View.center = self.contentView.center;
     self.loadingView.center = self.contentView.center;
     self.topView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, 70);
+    
+    self.watermarkView.frame = CGRectMake(CGRectGetMaxX(self.contentView.bounds) - 90, 16, 74, 74);
+    
     self.backBtn.frame = CGRectMake(self.isFullscreen?([WMPlayer IsiPhoneX]?60:30):10, self.topView.frame.size.height/2-(self.backBtn.currentImage.size.height+4)/2, self.backBtn.currentImage.size.width+6, self.backBtn.currentImage.size.height+4);
     self.titleLabel.frame = CGRectMake(CGRectGetMaxX(self.backBtn.frame)+5, 0, self.topView.frame.size.width-CGRectGetMaxX(self.backBtn.frame)-20-50, self.topView.frame.size.height);
     
@@ -744,6 +756,9 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     self.isPauseBySystem = NO;
     self.seekTime = playerModel.seekTime;
     self.titleLabel.text = playerModel.title;
+    
+    [self.watermarkView sd_setImageWithURL:[NSURL URLWithString:playerModel.watermarkUrl] placeholderImage:nil options:SDWebImageRetryFailed];
+    
     if(playerModel.playerItem){
         self.currentItem = playerModel.playerItem;
     }else{

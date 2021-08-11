@@ -23,5 +23,9 @@
 @property (nonatomic,assign) CGSize presentationSize;
 //是否是适合竖屏播放的资源，w：h<1的资源，一般是手机竖屏（人像模式）拍摄的视频资源
 @property (nonatomic,assign) BOOL verticalVideo;
+/**
+ 水印图片
+ */
+@property (nonatomic,copy  ) NSString *watermarkUrl;
 
 @end

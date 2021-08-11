@@ -95,6 +95,12 @@ typedef NS_ENUM(NSUInteger,WMControlType) {
 @property(nonatomic,assign)CGRect beforeBounds;
 @property(nonatomic,assign)CGPoint beforeCenter;
 @property (nonatomic, assign) WMPlayerViewState  viewState;
+
+/**
+ 水印图片
+ */
+@property (nonatomic,strong) UIImageView *watermarkView;
+
 /**
  播放器对应的model
  */

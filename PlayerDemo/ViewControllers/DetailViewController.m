@@ -142,6 +142,7 @@
 
     self.wmPlayer = [[WMPlayer alloc] initWithFrame:CGRectMake(0, [WMPlayer IsiPhoneX]?34:0, self.view.frame.size.width, self.view.frame.size.width*(9.0/16))];
     self.wmPlayer.delegate = self;
+    self.playerModel.watermarkUrl = @"http://media.jiazhengye.cn/index_icon/phpNXqYsk";
     self.wmPlayer.playerModel = self.playerModel;
     [self.view addSubview:self.wmPlayer];
     [self.wmPlayer play];
