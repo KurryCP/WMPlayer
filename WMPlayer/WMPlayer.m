@@ -259,7 +259,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     [self.pipBtn addTarget:self action:@selector(pipAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.pipBtn setImage:WMPlayerImage(@"pip.jpg") forState:UIControlStateNormal];
     [self.pipBtn setImage:WMPlayerImage(@"pip.jpg") forState:UIControlStateSelected];
-    self.pipBtn.hidden = NO;
+    self.pipBtn.hidden = YES;
     [self.contentView addSubview:self.pipBtn];
     
     //leftTimeLabel显示左边的时间进度
@@ -413,8 +413,11 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         self.bottomView.frame = CGRectMake(self.topView.frame.origin.x, self.contentView.frame.size.height-105, self.topView.frame.size.width, 105);
         self.leftTimeLabel.frame = CGRectMake(iphoneX_margin, 0, 100, 20);
         self.rightTimeLabel.frame = CGRectMake(self.bottomView.frame.size.width-iphoneX_margin-self.leftTimeLabel.frame.size.width, self.leftTimeLabel.frame.origin.y, self.leftTimeLabel.frame.size.width, self.leftTimeLabel.frame.size.height);
+        
         self.loadingProgress.frame = CGRectMake(self.leftTimeLabel.frame.origin.x, self.bottomView.frame.size.height/2-25, self.bottomView.frame.size.width-(self.leftTimeLabel.frame.origin.x)*2, 1);
-        self.progressSlider.frame = CGRectMake(self.loadingProgress.frame.origin.x-3, self.loadingProgress.frame.origin.y+2, self.bottomView.frame.size.width-(self.loadingProgress.frame.origin.x)*2+6, 1);
+        
+        self.progressSlider.frame = CGRectMake(self.loadingProgress.frame.origin.x-3, self.loadingProgress.frame.origin.y+1, self.bottomView.frame.size.width-(self.loadingProgress.frame.origin.x)*2+6, 1);
+        
         self.playOrPauseBtn.frame = CGRectMake(iphoneX_margin, self.progressSlider.frame.origin.y+15, self.playOrPauseBtn.currentImage.size.width, self.playOrPauseBtn.currentImage.size.height);
         self.rateBtn.frame = CGRectMake(self.bottomView.frame.size.width-iphoneX_margin-45, self.playOrPauseBtn.frame.origin.y, 45, 30);
     }else{
@@ -422,8 +425,11 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         self.playOrPauseBtn.frame = CGRectMake(10, self.bottomView.frame.size.height/2-self.playOrPauseBtn.currentImage.size.height/2, self.playOrPauseBtn.currentImage.size.width, self.playOrPauseBtn.currentImage.size.height);
         self.leftTimeLabel.frame = CGRectMake(CGRectGetMaxX(self.playOrPauseBtn.frame)+5, self.bottomView.frame.size.height/2+8, 100, 20);
         self.rightTimeLabel.frame = CGRectMake(self.bottomView.frame.size.width-self.leftTimeLabel.frame.origin.x-self.leftTimeLabel.frame.size.width, self.bottomView.frame.size.height/2+8, self.leftTimeLabel.frame.size.width, self.leftTimeLabel.frame.size.height);
-        self.loadingProgress.frame = CGRectMake(self.leftTimeLabel.frame.origin.x, self.bottomView.frame.size.height/2-2, self.bottomView.frame.size.width-(self.leftTimeLabel.frame.origin.x)*2, 1);
-        self.progressSlider.frame = CGRectMake(self.leftTimeLabel.frame.origin.x-3, self.bottomView.frame.size.height/2, self.bottomView.frame.size.width-(self.leftTimeLabel.frame.origin.x)*2+6, 1);
+        
+        self.loadingProgress.frame = CGRectMake(self.leftTimeLabel.frame.origin.x, self.bottomView.frame.size.height/2, self.bottomView.frame.size.width-(self.leftTimeLabel.frame.origin.x)*2, 1);
+        
+        self.progressSlider.frame = CGRectMake(self.leftTimeLabel.frame.origin.x-3, self.bottomView.frame.size.height/2+1, self.bottomView.frame.size.width-(self.leftTimeLabel.frame.origin.x)*2+6, 1);
+        
         self.rateBtn.frame = CGRectMake(self.bottomView.frame.size.width-self.playOrPauseBtn.frame.origin.x, self.playOrPauseBtn.frame.origin.y, 45, 30);
     }
     self.lockBtn.frame = CGRectMake(iphoneX_margin, self.contentView.frame.size.height/2-self.lockBtn.frame.size.height/2, self.lockBtn.currentImage.size.width, self.lockBtn.currentImage.size.height);
@@ -433,6 +439,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     
     self.bottomProgress.frame = CGRectMake(iphoneX_margin, self.contentView.frame.size.height-2, self.bottomView.frame.size.width-iphoneX_margin*2, 1);
     self.loadFailedLabel.center = self.contentView.center;
+    
 }
 #pragma mark
 #pragma mark 进入后台
