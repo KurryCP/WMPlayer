@@ -13,7 +13,6 @@
 
 
 #import "WMPlayer.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 //****************************宏*********************************
 #define WMPlayerSrcName(file) [@"WMPlayer.bundle" stringByAppendingPathComponent:file]
@@ -756,9 +755,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     self.isPauseBySystem = NO;
     self.seekTime = playerModel.seekTime;
     self.titleLabel.text = playerModel.title;
-    
-    [self.watermarkView sd_setImageWithURL:[NSURL URLWithString:playerModel.watermarkUrl] placeholderImage:nil options:SDWebImageRetryFailed];
-    
+
     if(playerModel.playerItem){
         self.currentItem = playerModel.playerItem;
     }else{

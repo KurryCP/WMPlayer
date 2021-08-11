@@ -13,6 +13,7 @@
 #import "LandscapeLeftViewController.h"
 #import "EnterFullScreenTransition.h"
 #import "ExitFullScreenTransition.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface DetailViewController ()<WMPlayerDelegate,UIViewControllerTransitioningDelegate>
 @property(nonatomic,strong)    UIButton *nextBtn;
@@ -142,9 +143,11 @@
 
     self.wmPlayer = [[WMPlayer alloc] initWithFrame:CGRectMake(0, [WMPlayer IsiPhoneX]?34:0, self.view.frame.size.width, self.view.frame.size.width*(9.0/16))];
     self.wmPlayer.delegate = self;
-    self.playerModel.watermarkUrl = @"http://media.jiazhengye.cn/index_icon/phpNXqYsk";
     self.wmPlayer.playerModel = self.playerModel;
     [self.view addSubview:self.wmPlayer];
+    
+    [self.wmPlayer.watermarkView sd_setImageWithURL:[NSURL URLWithString:@"http://media.jiazhengye.cn/index_icon/phpNXqYsk"] placeholderImage:nil options:SDWebImageRetryFailed];
+    
     [self.wmPlayer play];
     
     self.nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
